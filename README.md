@@ -1,2 +1,2 @@
-# cicloProject_RESTfulApi
+# CicloProject RESTfulApi
 RESTful API for our startup CICLOPROJECT
