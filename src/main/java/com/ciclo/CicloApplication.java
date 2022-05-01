@@ -1,13 +1,13 @@
-package com.cicloproject.democicloprojectapi;
+package com.ciclo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoCicloprojectApiApplication {
+public class CicloApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoCicloprojectApiApplication.class, args);
+		SpringApplication.run(CicloApplication.class, args);
 	}
 
 }
