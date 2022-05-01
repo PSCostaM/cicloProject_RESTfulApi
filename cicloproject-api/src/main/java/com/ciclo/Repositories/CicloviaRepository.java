@@ -1,16 +1,22 @@
 package com.ciclo.Repositories;
 
+import java.util.List;
+
+import com.ciclo.Entities.Calificacion;
 import com.ciclo.Entities.Ciclovia;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 public interface CicloviaRepository extends JpaRepository<Ciclovia, Long>{
-    @Modifying
-	@Query(value = "UPDATE Ciclovia SET calificacionCiclovia = ?2 WHERE id = ?1", nativeQuery = true)
-	void updateCalificacion(Long idCiclovia, float calificacion);
+    @Query(value = "SELECT calificaciones FROM Ciclovia WHERE id = ?1", nativeQuery = true)
+    List<Calificacion> getCalificacionesById(Long idCiclovia);
 
-    @Query(value = "SELECT calificacionCiclovia FROM Ciclovia WHERE id = ?1", nativeQuery = true)
-    float findCalificacionById(Long idCiclovia);
+    @Query(
+        value = "SELECT AVG(Ca.estrellasCalificacion) FROM Calificacion Ca INNER JOIN Ciclovia Ci ON Ci.id = Ca.idCiclovia WHERE Ci.id = ?1", nativeQuery = true)
+    float getAverageCalificacionById(Long idCiclovia);
+
+    @Query(
+        value = "SELECT Ca FROM Calificacion Ca INNER JOIN Ciclovia Ci ON Ci.id = Ca.idCiclovia WHERE Ci.id = ?1 AND Ca.idCalificacion = ?2", nativeQuery = true)
+    Calificacion getCalificacionxCicloviaId(Long idCiclovia, Long idCalificacion);
 }

@@ -1,26 +1,39 @@
 package com.ciclo.Entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.ciclo.Dto.CicloviaRequestDto;
 
-@AllArgsConstructor
+import javax.persistence.FetchType;
+import javax.persistence.CascadeType;
+
+import lombok.Data;
+
+@Data
 @Entity
 @Table(name = "Ciclovia")
-@Data
-@NoArgsConstructor
 public class Ciclovia {
     @Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long idCiclovia;
 
-    @Column(name = "calificacionCiclovia")
-    private float calificacionCiclovia;
+    @Column(name = "nombreCiclovia", length = 50)
+    private String nombreCiclovia;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "calificaciones")
+    private List<Calificacion> calificaciones;
+
+    public Ciclovia(CicloviaRequestDto cicloviaDto){
+        this.nombreCiclovia = cicloviaDto.getNombreCiclovia();
+        this.calificaciones = new ArrayList<>();
+    }
 }
