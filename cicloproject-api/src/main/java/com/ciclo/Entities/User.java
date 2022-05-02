@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package com.ciclo.Entities;
 
 import lombok.*;
 import javax.persistence.*;

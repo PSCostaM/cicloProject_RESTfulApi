@@ -1,4 +1,4 @@
-package com.example.demo.controllers;
+package com.ciclo.Controllers;
 
 public class ReportController {
 

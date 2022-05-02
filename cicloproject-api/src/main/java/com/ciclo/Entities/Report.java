@@ -1,10 +1,6 @@
-package com.example.demo.entities;
-
+package com.ciclo.Entities;
 import lombok.*;
-
 import javax.persistence.*;
-
-import com.example.demo.entities.User;
 
 @AllArgsConstructor
 @NoArgsConstructor

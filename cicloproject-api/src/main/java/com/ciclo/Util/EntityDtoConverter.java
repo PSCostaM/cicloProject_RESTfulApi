@@ -1,10 +1,10 @@
-package com.example.demo.util;
+package com.ciclo.Util;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.example.demo.dto.ReportResponse;
-import com.example.demo.entities.Report;
+import com.ciclo.Dto.ReportResponse;
+import com.ciclo.Entities.Report;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;

@@ -1,7 +1,7 @@
-package com.example.demo.util;
+package com.ciclo.Util;
 
-import com.example.demo.dto.ReportRequest;
-import com.example.demo.exception.IncorrectReportRequestException;
+import com.ciclo.Dto.ReportRequest;
+import com.ciclo.exception.IncorrectReportRequestException;
 
 public class ReportValidator {
     public static boolean validateReport(ReportRequest reportRequest) {

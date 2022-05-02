@@ -1,8 +1,9 @@
-package com.example.demo.dto;
+package com.ciclo.Dto;
 
-import com.example.demo.entities.User;
 
 import javax.validation.constraints.NotBlank;
+
+import com.ciclo.Entities.User;
 
 import lombok.Data;
 

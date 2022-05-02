@@ -1,11 +1,10 @@
-package com.example.demo.repository;
+package com.ciclo.Repositories;
 
-import java.util.List;
+// import java.util.List;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-
-import com.example.demo.entities.Report;
+// import org.springframework.data.jpa.repository.JpaRepository;
+// import org.springframework.data.jpa.repository.Query;
+// import com.ciclo.Entities.Report;
 
 public interface ReportRepository {
 
