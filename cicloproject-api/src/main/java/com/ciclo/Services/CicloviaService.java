@@ -18,10 +18,15 @@ public class CicloviaService {
     private CicloviaRepository cicloviaRepository;
     private CalificacionRepository calificacionRepository;
 
+    public CicloviaService(CicloviaRepository cicloviaRepository, CalificacionRepository calificacionRepository) {
+        this.cicloviaRepository = cicloviaRepository;
+        this.calificacionRepository = calificacionRepository;
+    }
+
     @Transactional
     public Ciclovia createCiclovia(CicloviaRequestDto cicloviaDto) {
         Ciclovia ciclovia = new Ciclovia(cicloviaDto);
-        return ciclovia;
+        return cicloviaRepository.save(ciclovia);
     }
 
     @Transactional
