@@ -19,7 +19,6 @@ import javax.persistence.CascadeType;
 
 import lombok.Data;
 
-
 @Data
 @Entity
 @Table(name = "Ciclovia")
