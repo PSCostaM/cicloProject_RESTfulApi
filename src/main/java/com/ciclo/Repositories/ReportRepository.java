@@ -1,12 +1,9 @@
-package com.example.demo.repository;
+package com.ciclo.Repositories;
 
-import java.util.List;
+import com.ciclo.Entities.Report;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
-import com.example.demo.entities.Report;
-
-public interface ReportRepository {
+public interface ReportRepository extends JpaRepository<Report, Long> {
 
 }

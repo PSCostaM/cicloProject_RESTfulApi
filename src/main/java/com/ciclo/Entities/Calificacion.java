@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,30 +20,30 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "Calificacion")
+@Table(name = "calificacion")
 public class Calificacion {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long idCalificacion;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long idCalificacion;
 
-    @Column(name="fechaCalificacion")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechaCalificacion;
+	@Column(name = "fechaCalificacion")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date fechaCalificacion;
 
-    @Column(name="estrellasCalificacion")
-    private int estrellasCalificacion;
+	@Column(name = "estrellasCalificacion")
+	private int estrellasCalificacion;
 
-    @Column(name="descripcionCalificacion")
-    private String descripcionCalificacion;
-    
-    @ManyToOne
-    @JoinColumn(name = "idCiclovia", nullable = false)
-    private Ciclovia ciclovia;
+	@Column(name = "descripcionCalificacion")
+	private String descripcionCalificacion;
 
-    public Calificacion(Ciclovia ciclovia, CalificacionRequestDto calificacionDto) {
-        this.fechaCalificacion = new Date();
-        this.estrellasCalificacion = calificacionDto.getEstrellasCalificacion();
-        this.descripcionCalificacion = calificacionDto.getDescripcionCalificacion();
-        this.ciclovia = ciclovia;
-    }
+	@ManyToOne
+	@JoinColumn(name = "ciclovia_id", nullable = false)
+	private Ciclovia ciclovia;
+
+	public Calificacion(Ciclovia ciclovia, CalificacionRequestDto calificacionDto) {
+		this.fechaCalificacion = new Date();
+		this.estrellasCalificacion = calificacionDto.getEstrellasCalificacion();
+		this.descripcionCalificacion = calificacionDto.getDescripcionCalificacion();
+		this.ciclovia = ciclovia;
+	}
 }

@@ -1,5 +1,7 @@
 package com.ciclo.Services;
 
+import java.util.List;
+
 import com.ciclo.Dto.ParkingDto;
 import com.ciclo.Entities.Parking;
 import com.ciclo.Repositories.ParkingRepository;
@@ -36,6 +38,10 @@ public class ParkingService {
 		String parkingName = parkingRepository.getById(parkingId).getUbicacion();
 		parkingRepository.updateStatus(parkingId, isFull);
 		return String.format("%s full: %d", parkingName, isFull);
+	}
+
+	public List<Parking> listAllParkings() {
+		return parkingRepository.findAll();
 	}
 
 }

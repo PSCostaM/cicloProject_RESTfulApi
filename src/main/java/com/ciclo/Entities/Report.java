@@ -1,10 +1,18 @@
-package com.example.demo.entities;
+package com.ciclo.Entities;
 
-import lombok.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-import javax.persistence.*;
-
-import com.example.demo.entities.User;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,13 +21,14 @@ import com.example.demo.entities.User;
 @Entity
 @Table(name = "Report")
 public class Report {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long IdReport;
-    @Column(name = "fechaReporte")
-    private String dateReport;
-    @Column(name = "descripcionReporte")
-    private String description;
-    @Column(name = "idUsuario")
-    private User idUsuario;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long IdReport;
+	@Column(name = "fechaReporte")
+	private String dateReport;
+	@Column(name = "descripcionReporte")
+	private String description;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	private User user;
 }

@@ -1,5 +1,7 @@
 package com.ciclo.Controllers;
 
+import java.util.List;
+
 import com.ciclo.Dto.ParkingDto;
 import com.ciclo.Entities.Parking;
 import com.ciclo.Services.ParkingService;
@@ -7,6 +9,7 @@ import com.ciclo.Services.ParkingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,4 +40,11 @@ public class ParkingController {
 		String response = parkingService.updateParkingStatus(parkingId, isFull);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
+
+	@GetMapping("list")
+	public ResponseEntity<List<Parking>> listAllParkings() {
+		List<Parking> response = parkingService.listAllParkings();
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
 }
