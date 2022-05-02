@@ -5,9 +5,7 @@ import java.util.stream.Collectors;
 
 import com.ciclo.Dto.CalificacionResponseDto;
 import com.ciclo.Dto.CicloviaResponseDto;
-import com.ciclo.Dto.ReportResponse;
 import com.ciclo.Entities.Calificacion;
-// import com.ciclo.Entities.Report;
 import com.ciclo.Entities.Ciclovia;
 
 import org.modelmapper.ModelMapper;
@@ -21,17 +19,6 @@ public class EntityDtoConverter {
     public EntityDtoConverter(ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
     }
-
-    // public ReportResponse convertEntityToDto(Report report) {
-    //     return modelMapper.map(report, ReportResponse.class);
-    // }
-
-    // public List<ReportResponse> convertEntityToDto(List<Report> reports) {
-    //     return reports.stream()
-    //             .map(report -> convertEntityToDto(report))
-    //             .collect(Collectors.toList());
-    // }
-
     
     public CicloviaResponseDto convertEntityToDto(Ciclovia ciclovia) {
         return modelMapper.map(ciclovia, CicloviaResponseDto.class);
