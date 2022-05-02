@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import a.com.example.demo.entities.Calificacion;
 
 public interface CalificacionRepository extends JpaRepository<Calificacion, Long>{
-    @Query(value = "SELECT * FROM Calificacion", nativeQuery = true)
+    @Query(value = "SELECT * FROM Calificacion x ORDER BY x.id_estacionamiento", nativeQuery = true)
     List<Calificacion> findBestParkingOrderByCalificacionDesc();
 }
