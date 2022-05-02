@@ -8,50 +8,49 @@ import com.ciclo.Entities.Calificacion;
 import com.ciclo.Entities.Ciclovia;
 import com.ciclo.Repositories.CalificacionRepository;
 import com.ciclo.Repositories.CicloviaRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@Transactional
+import org.springframework.stereotype.Service;
+
 @Service
 public class CicloviaService {
-	@Autowired
-	private CicloviaRepository cicloviaRepository;
-	@Autowired
-	private CalificacionRepository calificacionRepository;
+    private CicloviaRepository cicloviaRepository;
+    private CalificacionRepository calificacionRepository;
 
-	@Transactional
-	public Ciclovia createCiclovia(CicloviaRequestDto cicloviaDto) {
-		Ciclovia ciclovia = new Ciclovia(cicloviaDto);
-		return cicloviaRepository.save(ciclovia);
-	}
+    public CicloviaService(CicloviaRepository cicloviaRepository, CalificacionRepository calificacionRepository) {
+        this.cicloviaRepository = cicloviaRepository;
+        this.calificacionRepository = calificacionRepository;
+    }
 
-	@Transactional
-	public Calificacion createCalificacion(Long idCiclovia, CalificacionRequestDto calificacionDto) {
-		Calificacion calificacion = new Calificacion(getCicloviaById(idCiclovia), calificacionDto);
-		return calificacionRepository.save(calificacion);
-	}
+    public Ciclovia createCiclovia(CicloviaRequestDto cicloviaDto) {
+        Ciclovia ciclovia = new Ciclovia(cicloviaDto);
+        return cicloviaRepository.save(ciclovia);
+    }
 
-	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-	public Ciclovia getCicloviaById(Long idCiclovia) {
-		Ciclovia ciclovia = cicloviaRepository.findById(idCiclovia).get();
-		return ciclovia;
-	}
+    @Transactional
+    public Calificacion createCalificacion(Long idCiclovia, CalificacionRequestDto calificacionDto) {
+        Calificacion calificacion = new Calificacion(getCicloviaById(idCiclovia), calificacionDto);
+        return calificacionRepository.save(calificacion);
+    }
+    
+    @Transactional(readOnly = true)
+    public Ciclovia getCicloviaById(Long idCiclovia) {
+        return cicloviaRepository.findCicloviaByCicloviaId(idCiclovia);
+    }
 
-	@Transactional
-	public List<Calificacion> getCalificacionesById(Long idCiclovia) {
-		return cicloviaRepository.getCalificacionesById(idCiclovia);
-	}
+    @Transactional
+    public List<Calificacion> getCalificacionesById(Long idCiclovia) {
+        return calificacionRepository.getCalificacionesById(idCiclovia);
+    }
 
-	@Transactional
-	public float getAverageCalificacionById(Long idCiclovia) {
-		return cicloviaRepository.getAverageCalificacionById(idCiclovia);
-	}
+    public Calificacion getCalificacionById(Long idCalificacion) {
+        return calificacionRepository.findCalificacionByCalificacionId(idCalificacion);
+    }
 
-	public Calificacion getCalificacionxCicloviaId(Long idCiclovia, Long idCalificacion) {
-		return cicloviaRepository.getCalificacionxCicloviaId(idCiclovia, idCalificacion);
-	}
+    @Transactional
+    public Float getAverageCalificacionById(Long idCiclovia) {
+        return calificacionRepository.getAverageCalificacionById(idCiclovia);
+    }
 }
+
+
