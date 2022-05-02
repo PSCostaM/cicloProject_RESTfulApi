@@ -3,7 +3,9 @@ package com.ciclo.Services;
 import java.util.List;
 
 import com.ciclo.Dto.ParkingDto;
+import com.ciclo.Entities.Calificacion;
 import com.ciclo.Entities.Parking;
+import com.ciclo.Repositories.CalificacionRepository;
 import com.ciclo.Repositories.ParkingRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class ParkingService {
 	@Autowired
 	private ParkingRepository parkingRepository;
+	private CalificacionRepository calificacionRepository;
+
+	public ParkingService(ParkingRepository parkingRepository, CalificacionRepository calificacionRepository) {
+        this.parkingRepository = parkingRepository;
+        this.calificacionRepository = calificacionRepository;
+    }
 
 	// Crear un estacionamiento
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
@@ -43,5 +51,15 @@ public class ParkingService {
 	public List<Parking> listAllParkings() {
 		return parkingRepository.findAll();
 	}
+
+	@Transactional
+	public List<Calificacion> getParkingbyId(Long id){
+        return calificacionRepository.findCalificacionByParkingId(id);
+    }
+
+	@Transactional
+	public List<Parking> getDisponibilidad(){
+        return parkingRepository.findDisponibilidad();
+    }
 
 }
