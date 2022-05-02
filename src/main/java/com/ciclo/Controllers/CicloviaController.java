@@ -16,7 +16,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,8 +42,8 @@ public class CicloviaController {
         return new ResponseEntity<>(converter.convertEntityToDto(ciclovia), HttpStatus.OK);
     }
 
-    @PutMapping("/{cicloviaId}/calificaciones")
-    public ResponseEntity<CalificacionResponseDto> updateCalificaciones(@PathVariable Long cicloviaId, @RequestBody CalificacionRequestDto calificacion){
+    @PostMapping("/{cicloviaId}/calificaciones")
+    public ResponseEntity<CalificacionResponseDto> createCalificacion(@PathVariable Long cicloviaId, @RequestBody CalificacionRequestDto calificacion){
         Calificacion calificacionCreated = cicloviaService.createCalificacion(cicloviaId, calificacion);
         return new ResponseEntity<>(converter.convertEntityToDto(calificacionCreated), HttpStatus.CREATED);
     }
