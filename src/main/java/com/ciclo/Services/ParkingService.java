@@ -2,6 +2,7 @@ package com.ciclo.Services;
 
 import java.util.List;
 
+import com.ciclo.Dto.CalificacionRequestDto;
 import com.ciclo.Dto.ParkingDto;
 import com.ciclo.Entities.Calificacion;
 import com.ciclo.Entities.Parking;
@@ -53,13 +54,24 @@ public class ParkingService {
 	}
 
 	@Transactional
-	public List<Calificacion> getParkingbyId(Long id){
+	public List<Calificacion> getParkingCalificacionbyId(Long id){
         return calificacionRepository.findCalificacionByParkingId(id);
     }
 
 	@Transactional
 	public List<Parking> getDisponibilidad(){
         return parkingRepository.findDisponibilidad();
+    }
+
+	@Transactional
+    public Calificacion createCalificacion(Long id, CalificacionRequestDto calificacionDto) {
+        Calificacion calificacion = new Calificacion(getParkingbyId(id), calificacionDto);
+        return calificacionRepository.save(calificacion);
+    }
+
+	@Transactional(readOnly = true)
+    public Parking getParkingbyId(Long id) {
+        return parkingRepository.findParkingbyID(id);
     }
 
 }

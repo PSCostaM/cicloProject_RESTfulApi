@@ -1,38 +1,40 @@
 package com.ciclo.Entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.*;
 
 import com.ciclo.Dto.ParkingDto;
 
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @Entity
 @Table(name = "parking")
 @Data
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class Parking {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	Long id;
+	private Long id;
 
 	@Column
-	String ubicacion;
+	private String ubicacion;
 
 	@Column
-	int isFull;
+	private int isFull;
 
 	@Column
-	double stars;
+	private double stars;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "ciclovia")
+    private List<Calificacion> calificaciones;
 
 	public Parking(ParkingDto parkingDto) {
 		this.ubicacion = parkingDto.getUbicacion();
 		this.isFull = parkingDto.getIsFull();
 		this.stars = parkingDto.getStars();
+		this.calificaciones = new ArrayList<>();
 	}
 }

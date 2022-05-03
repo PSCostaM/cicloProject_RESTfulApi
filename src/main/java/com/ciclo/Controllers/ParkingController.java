@@ -2,6 +2,7 @@ package com.ciclo.Controllers;
 
 import java.util.List;
 
+import com.ciclo.Dto.CalificacionRequestDto;
 import com.ciclo.Dto.CalificacionResponseDto;
 import com.ciclo.Dto.ParkingDto;
 import com.ciclo.Entities.Calificacion;
@@ -59,7 +60,7 @@ public class ParkingController {
 
 	@GetMapping("/calificaciones/{id}")
 	public ResponseEntity<List<CalificacionResponseDto>> getCalificacionbyId(@PathVariable Long id){
-		List<Calificacion> calificacion = parkingService.getParkingbyId(id);
+		List<Calificacion> calificacion = parkingService.getParkingCalificacionbyId(id);
 		return new ResponseEntity<>(converter.convertEntityToDto(calificacion), HttpStatus.OK);
 	}
 
@@ -68,4 +69,16 @@ public class ParkingController {
 		List<Parking> calificacion = parkingService.getDisponibilidad();
 		return new ResponseEntity<>(calificacion, HttpStatus.OK);
 	}
+
+	@PostMapping("/{parkingId}/calificaciones")
+    public ResponseEntity<CalificacionResponseDto> createCalificacion(@PathVariable Long parkingId, @RequestBody CalificacionRequestDto calificacion){
+        Calificacion calificacionCreated = parkingService.createCalificacion(parkingId, calificacion);
+        return new ResponseEntity<>(converter.convertEntityToDto(calificacionCreated), HttpStatus.CREATED);
+    }
+
+	@GetMapping("/{id}")
+	public ResponseEntity<ParkingDto> findParkingbyId(@PathVariable Long Id){
+        Parking parking = parkingService.getParkingbyId(Id);
+        return new ResponseEntity<>(converter.convertEntityToDto2(parking), HttpStatus.OK);
+    }
 }

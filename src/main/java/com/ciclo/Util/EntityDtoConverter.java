@@ -5,8 +5,10 @@ import java.util.stream.Collectors;
 
 import com.ciclo.Dto.CalificacionResponseDto;
 import com.ciclo.Dto.CicloviaResponseDto;
+import com.ciclo.Dto.ParkingDto;
 import com.ciclo.Entities.Calificacion;
 import com.ciclo.Entities.Ciclovia;
+import com.ciclo.Entities.Parking;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -32,5 +34,9 @@ public class EntityDtoConverter {
         return reports.stream()
                 .map(report -> convertEntityToDto(report))
                 .collect(Collectors.toList());
+    }
+
+    public ParkingDto convertEntityToDto2(Parking parking){
+        return modelMapper.map(parking, ParkingDto.class); 
     }
 }
