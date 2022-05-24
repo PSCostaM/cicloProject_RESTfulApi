@@ -8,6 +8,9 @@ import com.ciclo.Entities.Calificacion;
 import com.ciclo.Entities.Ciclovia;
 import com.ciclo.Repositories.CalificacionRepository;
 import com.ciclo.Repositories.CicloviaRepository;
+import com.ciclo.Util.CalificacionValidator;
+import com.ciclo.Util.CicloviaValidator;
+
 import org.springframework.transaction.annotation.Transactional;
 
 import org.springframework.stereotype.Service;
@@ -23,32 +26,42 @@ public class CicloviaService {
     }
 
     public Ciclovia createCiclovia(CicloviaRequestDto cicloviaDto) {
+        CicloviaValidator.validateCreate(cicloviaDto);
         Ciclovia ciclovia = new Ciclovia(cicloviaDto);
         return cicloviaRepository.save(ciclovia);
     }
 
     @Transactional
     public Calificacion createCalificacion(Long idCiclovia, CalificacionRequestDto calificacionDto) {
-        Calificacion calificacion = new Calificacion(getCicloviaById(idCiclovia), calificacionDto);
+        CalificacionValidator.validateCreate(calificacionDto);
+        Ciclovia ciclovia = getCicloviaById(idCiclovia);
+        CicloviaValidator.validateGetByCiclovia(ciclovia);
+        Calificacion calificacion = new Calificacion(ciclovia , calificacionDto);
         return calificacionRepository.save(calificacion);
     }
     
     @Transactional(readOnly = true)
     public Ciclovia getCicloviaById(Long idCiclovia) {
-        return cicloviaRepository.findCicloviaByCicloviaId(idCiclovia);
+        Ciclovia ciclovia =  cicloviaRepository.findCicloviaByCicloviaId(idCiclovia);
+        CicloviaValidator.validateGetByCiclovia(ciclovia);
+        return ciclovia;
     }
 
     @Transactional
     public List<Calificacion> getCalificacionesById(Long idCiclovia) {
+        CicloviaValidator.validateGetByCiclovia(cicloviaRepository.findCicloviaByCicloviaId(idCiclovia));
         return calificacionRepository.getCalificacionesById(idCiclovia);
     }
 
     public Calificacion getCalificacionById(Long idCalificacion) {
-        return calificacionRepository.findCalificacionByCalificacionId(idCalificacion);
+        Calificacion calificacion = calificacionRepository.findCalificacionByCalificacionId(idCalificacion);
+        CalificacionValidator.validateGetCalificacion(calificacion);
+        return calificacion;
     }
 
     @Transactional
     public Float getAverageCalificacionById(Long idCiclovia) {
+        CicloviaValidator.validateGetByCiclovia(cicloviaRepository.findCicloviaByCicloviaId(idCiclovia));
         return calificacionRepository.getAverageCalificacionById(idCiclovia);
     }
 }
