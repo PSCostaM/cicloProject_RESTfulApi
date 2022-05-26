@@ -54,28 +54,20 @@ public class ParkingService {
 		return parkingRepository.findAll();
 	}
 
-<<<<<<< Updated upstream
+	
+	//Encontrar un parking por el número de Id
 	@Transactional
 	public List<Calificacion> getParkingCalificacionbyId(Long id){
         return calificacionRepository.findCalificacionByParkingId(id);
     }
 
-	@Transactional
-=======
-	//Encontrar un parking por el número de Id
-	@Transactional
-	public List<Calificacion> getParkingbyId(Long id){
-        return calificacionRepository.findCalificacionByParkingId(id);
-    }
 
 	//Listar los parkings disponibles
     @Transactional
->>>>>>> Stashed changes
 	public List<Parking> getDisponibilidad(){
         return parkingRepository.findDisponibilidad();
     }
 
-<<<<<<< Updated upstream
 	@Transactional
     public Calificacion createCalificacion(Long id, CalificacionRequestDto calificacionDto) {
         Calificacion calificacion = new Calificacion(getParkingbyId(id), calificacionDto);
@@ -86,7 +78,4 @@ public class ParkingService {
     public Parking getParkingbyId(Long id) {
         return parkingRepository.findParkingbyID(id);
     }
-
-=======
->>>>>>> Stashed changes
 }

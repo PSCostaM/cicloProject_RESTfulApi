@@ -2,17 +2,11 @@ package com.ciclo.Controllers;
 
 import java.util.List;
 
-<<<<<<< Updated upstream
 import com.ciclo.Dto.CalificacionRequestDto;
 import com.ciclo.Dto.CalificacionResponseDto;
 import com.ciclo.Dto.ParkingDto;
 import com.ciclo.Entities.Calificacion;
 //import com.ciclo.Entities.Calificacion;
-=======
-import com.ciclo.Dto.CalificacionResponseDto;
-import com.ciclo.Dto.ParkingDto;
-import com.ciclo.Entities.Calificacion;
->>>>>>> Stashed changes
 import com.ciclo.Entities.Parking;
 import com.ciclo.Services.ParkingService;
 import com.ciclo.Util.EntityDtoConverter;
@@ -35,19 +29,15 @@ public class ParkingController {
 	@Autowired
 	private ParkingService parkingService;
 	private EntityDtoConverter converter;
-<<<<<<< Updated upstream
     public ParkingController(ParkingService parkingService, EntityDtoConverter converter) {
         this.parkingService = parkingService;
         this.converter = converter;
     }
 
-=======
->>>>>>> Stashed changes
 	@PostMapping
 	public ResponseEntity<Parking> createParking(@RequestBody ParkingDto parkingDto) {
 		Parking parking = parkingService.createParking(parkingDto);
 		return new ResponseEntity<>(parking, HttpStatus.OK);
-		this.converter = converter;
 	}
 
 	@PutMapping("rating")
@@ -70,11 +60,7 @@ public class ParkingController {
 
 	@GetMapping("/calificaciones/{id}")
 	public ResponseEntity<List<CalificacionResponseDto>> getCalificacionbyId(@PathVariable Long id){
-<<<<<<< Updated upstream
 		List<Calificacion> calificacion = parkingService.getParkingCalificacionbyId(id);
-=======
-		List<Calificacion> calificacion = parkingService.getParkingbyId(id);
->>>>>>> Stashed changes
 		return new ResponseEntity<>(converter.convertEntityToDto(calificacion), HttpStatus.OK);
 	}
 
@@ -84,7 +70,6 @@ public class ParkingController {
 		return new ResponseEntity<>(calificacion, HttpStatus.OK);
 	}
 
-<<<<<<< Updated upstream
 	@PostMapping("/{parkingId}/calificaciones")
     public ResponseEntity<CalificacionResponseDto> createCalificacion(@PathVariable Long parkingId, @RequestBody CalificacionRequestDto calificacion){
         Calificacion calificacionCreated = parkingService.createCalificacion(parkingId, calificacion);
@@ -96,6 +81,4 @@ public class ParkingController {
         Parking parking = parkingService.getParkingbyId(Id);
         return new ResponseEntity<>(converter.convertEntityToDto2(parking), HttpStatus.OK);
     }
-=======
->>>>>>> Stashed changes
 }
