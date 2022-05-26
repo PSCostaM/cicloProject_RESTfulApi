@@ -22,7 +22,10 @@ public interface ParkingRepository extends JpaRepository<Parking, Long> {
 
 	@Query(value = "SELECT * FROM Parking x WHERE x.is_full = 0", nativeQuery = true)
 	List<Parking> findDisponibilidad();
+<<<<<<< Updated upstream
 
 	@Query("SELECT c FROM Parking c WHERE c.id = ?1")
     Parking findParkingbyID(Long id);
+=======
+>>>>>>> Stashed changes
 }
