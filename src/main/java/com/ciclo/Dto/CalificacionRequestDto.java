@@ -3,13 +3,14 @@ package com.ciclo.Dto;
 
 import javax.validation.constraints.NotNull;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class CalificacionRequestDto {
     @NotNull
     int estrellasCalificacion;
     String descripcionCalificacion;
+    Long id;
 }

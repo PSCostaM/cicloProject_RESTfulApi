@@ -9,4 +9,5 @@ public class CalificacionResponseDto {
     Date fechaCalificacion;
     int estrellasCalificacion;
     String descripcionCalificacion;
+    Long id;
 }

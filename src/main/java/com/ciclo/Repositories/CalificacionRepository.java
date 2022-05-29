@@ -17,5 +17,8 @@ public interface CalificacionRepository extends JpaRepository<Calificacion, Long
     @Query(
         value = "SELECT AVG(Ca.estrellas_calificacion) FROM Calificacion Ca INNER JOIN Ciclovia Ci ON Ci.id_ciclovia = Ca.id_ciclovia WHERE Ci.id_ciclovia = ?1", nativeQuery = true)
     float getAverageCalificacionById(Long idCiclovia);
+
+    @Query(value = "SELECT * FROM Calificacion INNER JOIN Parking ON Calificacion.id_Parking = Parking.id WHERE Calificacion.id_Parking = ?1", nativeQuery = true)
+    List<Calificacion> findCalificacionByParkingId(Long id);
 }
 
