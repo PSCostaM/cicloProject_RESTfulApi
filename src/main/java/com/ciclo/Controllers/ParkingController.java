@@ -40,9 +40,6 @@ public class ParkingController {
 
 	@PostMapping
 	public ResponseEntity<Parking> createParking(@RequestBody ParkingDtoRequest parkingDto) {
-		System.out.println("CREATING PARKING");
-		System.out.println(parkingDto.getUbicacion());
-
 		Parking parking = parkingService.createParking(parkingDto);
 		return new ResponseEntity<>(parking, HttpStatus.OK);
 	}

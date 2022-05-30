@@ -7,7 +7,7 @@ import com.ciclo.exception.IncorrectReportRequestException;
 public class ParkingValidator {
 	public static boolean validateCreate(ParkingDtoRequest parkingDto) {
 		if (parkingDto.getUbicacion() == null)
-			throw new IncorrectReportRequestException("Los datos del parking no fueron encontrados");
+			throw new IncorrectReportRequestException("Location field is empty");
 		return true;
 	}
 

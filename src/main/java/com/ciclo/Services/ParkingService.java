@@ -39,6 +39,7 @@ public class ParkingService {
 	// Crear un estacionamiento
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	public Parking createParking(ParkingDtoRequest parkingDto) {
+		ParkingValidator.validateCreate(parkingDto);
 		Parking parking = new Parking(parkingDto);
 		return parkingRepository.save(parking);
 	}
