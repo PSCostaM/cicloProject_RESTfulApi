@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import com.ciclo.Dto.CalificacionResponseDto;
 import com.ciclo.Dto.CicloviaResponseDto;
-import com.ciclo.Dto.ParkingDto;
+import com.ciclo.Dto.ParkingDtoResponse;
 import com.ciclo.Entities.Calificacion;
 import com.ciclo.Entities.Ciclovia;
 import com.ciclo.Entities.Parking;
@@ -41,7 +41,13 @@ public class EntityDtoConverter {
 				.collect(Collectors.toList());
 	}
 
-	public ParkingDto convertEntityToDto2(Parking parking) {
-		return modelMapper.map(parking, ParkingDto.class);
+	public ParkingDtoResponse convertEntityToDto2(Parking parking) {
+		return modelMapper.map(parking, ParkingDtoResponse.class);
+	}
+
+	public List<ParkingDtoResponse> convertEntityToDto2(List<Parking> parkings) {
+		return parkings.stream()
+				.map(parking -> convertEntityToDto2(parking))
+				.collect(Collectors.toList());
 	}
 }

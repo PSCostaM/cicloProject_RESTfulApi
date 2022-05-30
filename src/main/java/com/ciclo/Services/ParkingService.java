@@ -3,14 +3,15 @@ package com.ciclo.Services;
 import java.util.List;
 
 import com.ciclo.Dto.CalificacionRequestDto;
-import com.ciclo.Dto.ParkingDto;
+import com.ciclo.Dto.ParkingDtoRequest;
+import com.ciclo.Dto.ParkingDtoResponse;
 import com.ciclo.Entities.Calificacion;
 import com.ciclo.Entities.Parking;
 import com.ciclo.Repositories.CalificacionRepository;
 import com.ciclo.Repositories.ParkingRepository;
 import com.ciclo.Util.CalificacionValidator;
+import com.ciclo.Util.EntityDtoConverter;
 import com.ciclo.Util.ParkingValidator;
-import com.ciclo.exception.IncorrectReportRequestException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,12 +24,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class ParkingService {
 	@Autowired
 	private ParkingRepository parkingRepository;
+	@Autowired
 	private CalificacionRepository calificacionRepository;
-
-	public ParkingService(ParkingRepository parkingRepository, CalificacionRepository calificacionRepository) {
-		this.parkingRepository = parkingRepository;
-		this.calificacionRepository = calificacionRepository;
-	}
+	@Autowired
+	private EntityDtoConverter entityDtoConverter;
 
 	@Transactional(readOnly = true)
 	public Parking getParkingById(Long idParking) {
@@ -39,7 +38,7 @@ public class ParkingService {
 
 	// Crear un estacionamiento
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-	public Parking createParking(ParkingDto parkingDto) {
+	public Parking createParking(ParkingDtoRequest parkingDto) {
 		Parking parking = new Parking(parkingDto);
 		return parkingRepository.save(parking);
 	}
@@ -60,8 +59,9 @@ public class ParkingService {
 	}
 
 	// Listar todos los parkings
-	public List<Parking> listAllParkings() {
-		return parkingRepository.findAll();
+	public List<ParkingDtoResponse> listAllParkings() {
+		List<Parking> parkings = parkingRepository.findAll();
+		return entityDtoConverter.convertEntityToDto2(parkings);
 	}
 
 	// Encontrar un parking por el número de Id

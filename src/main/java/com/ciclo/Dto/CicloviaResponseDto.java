@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class CicloviaResponseDto {
-    Long idCiclovia;
-    String nombreCiclovia;
+	Long idCiclovia;
+	String nombreCiclovia;
 }

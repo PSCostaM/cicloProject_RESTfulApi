@@ -3,7 +3,7 @@ package com.ciclo.Dto;
 import lombok.Data;
 
 @Data
-public class ParkingDto {
+public class ParkingDtoRequest {
 	String ubicacion;
 	int isFull;
 	double stars;
