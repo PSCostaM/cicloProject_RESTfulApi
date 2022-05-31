@@ -57,8 +57,8 @@ public class ParkingController {
 	}
 
 	@GetMapping("list")
-	public ResponseEntity<List<ParkingDtoResponse>> listAllParkings() {
-		List<ParkingDtoResponse> response = parkingService.listAllParkings();
+	public ResponseEntity<List<Parking>> listAllParkings() {
+		List<Parking> response = parkingService.listAllParkings();
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
