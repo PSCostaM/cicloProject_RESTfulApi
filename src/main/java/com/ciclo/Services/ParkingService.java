@@ -3,7 +3,7 @@ package com.ciclo.Services;
 import java.util.List;
 
 import com.ciclo.Dto.CalificacionRequestDto;
-import com.ciclo.Dto.ParkingDto;
+import com.ciclo.Dto.ParkingDtoRequest;
 import com.ciclo.Entities.Calificacion;
 import com.ciclo.Entities.Parking;
 import com.ciclo.Repositories.CalificacionRepository;
@@ -29,7 +29,7 @@ public class ParkingService {
 
 	// Crear un estacionamiento
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
-	public Parking createParking(ParkingDto parkingDto) {
+	public Parking createParking(ParkingDtoRequest parkingDto) {
 		Parking parking = new Parking(parkingDto);
 		return parkingRepository.save(parking);
 	}
