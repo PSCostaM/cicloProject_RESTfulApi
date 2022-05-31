@@ -31,7 +31,7 @@ public class UserService {
         userObj.setEmail(userRequest.getEmail());
         userObj.setImageurl(userRequest.getImageurl());
         userObj.setPassword(userRequest.getPassword());
-        userObj.setCryptmethod(userRequest.getCryptmethod());
+        userObj.setCryptmethod("text");
         return userObj;
     }
 }

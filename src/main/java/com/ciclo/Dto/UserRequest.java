@@ -8,10 +8,7 @@ public class UserRequest {
     private String username;
     @NotBlank
     private String email;
-    @NotBlank
     private String imageurl;
     @NotBlank
     private String password;
-    @NotBlank
-    private String cryptmethod;
 }
