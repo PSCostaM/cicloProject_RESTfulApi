@@ -1,16 +1,14 @@
 package com.ciclo.Dto;
 
-import com.ciclo.Entities.User;
 
 import lombok.Data;
-import lombok.NonNull;
+
+import javax.validation.constraints.NotNull;
+
 
 @Data
 public class ReportRequest {
-	@NonNull
-	private String IdReport;
-	@NonNull
-	private String dateReport;
+	@NotNull
 	private String description;
-	private User idUser;
+	private long idUser;
 }

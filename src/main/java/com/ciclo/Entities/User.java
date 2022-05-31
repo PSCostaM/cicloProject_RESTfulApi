@@ -37,7 +37,7 @@ public class User {
 	@Column(name = "metodoEncriptacion")
 	private String cryptmethod;
 
-	@OneToMany(mappedBy = "_user", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Report> reports;
+	//@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+	//private List<Report> reports;
 
 }

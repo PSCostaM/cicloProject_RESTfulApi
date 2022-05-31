@@ -13,4 +13,7 @@ public interface RutaRepository extends JpaRepository<Ruta, Long> {
 
     @Query(value = "SELECT r FROM Ruta r")
     List<Ruta> getAllRutas();
+
+    @Query(value = "SELECT r FROM Ruta r WHERE r.ubicacionSalida = :ubicacionSalida AND r.ubicacionLlegada = :ubicacionLlegada")
+    List<Ruta> getRutasxPuntos(@Param("ubicacionSalida")String ubicacionSalida,@Param("ubicacionLlegada")String ubicacionLlegada);
 }

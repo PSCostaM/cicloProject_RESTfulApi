@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ciclo.Dto.RutaRequest;
 import com.ciclo.Entities.Ruta;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,4 +32,6 @@ public class RutaService {
     public List<Ruta> getRutasByUsuario(Long idUser) { return rutaRepository.getRutasxUser(idUser); }
 
     public List<Ruta> getAllRutas() { return rutaRepository.getAllRutas(); }
+
+    public List<Ruta> getRutasxPuntos(String ubicacionSalida, String ubicacionLlegada) { return rutaRepository.getRutasxPuntos(ubicacionSalida,ubicacionLlegada); }
 }
