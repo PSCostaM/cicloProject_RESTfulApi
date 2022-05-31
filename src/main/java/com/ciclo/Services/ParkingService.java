@@ -54,6 +54,12 @@ public class ParkingService {
 		return parkingRepository.findAll();
 	}
 
+	@Transactional
+    public Float getAverageCalificacionById(Long idParking) {
+        if(calificacionRepository.getCalificacionesById(idParking).size() == 0) return 0.0f;
+        return calificacionRepository.getAverageCalificacionByParkingId(idParking);        
+    }
+
 	
 	//Encontrar un parking por el número de Id
 	@Transactional
