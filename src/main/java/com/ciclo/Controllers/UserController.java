@@ -29,7 +29,12 @@ public class UserController {
 		User user = userService.createUser(request);
 		return new ResponseEntity<>(converter.convertUserToDto(user), HttpStatus.CREATED);
 	}
-
+	@GetMapping("/findUserByLogIn/")
+	@ResponseBody
+	public ResponseEntity<UserResponse> findUserByLogIn(@RequestParam("email") String email, @RequestParam("password") String password) {
+		User user = userService.getUserByLogIn(email, password);
+		return new ResponseEntity<>(converter.convertUserToDto(user), HttpStatus.OK);
+	}
 	@GetMapping("/findUsers")
 	public ResponseEntity<List<UserResponse>> findUsers() {
 		List<User> users = userService.getUsers();

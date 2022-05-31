@@ -24,6 +24,8 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public User getUserById(Long idUser) { return userRepository.getUserById(idUser); }
+    @Transactional(readOnly = true)
+    public User getUserByLogIn(String email, String password) { return userRepository.getUserByLogIn(email, password); }
 
     private User initUser(UserRequest userRequest) {
         User userObj = new User();
