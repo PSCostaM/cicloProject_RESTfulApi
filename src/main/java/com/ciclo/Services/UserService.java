@@ -22,6 +22,9 @@ public class UserService {
     @Transactional(readOnly = true)
     public List<User> getUsers() { return userRepository.getAllUsers(); }
 
+    @Transactional(readOnly = true)
+    public User getUserById(Long idUser) { return userRepository.getUserById(idUser); }
+
     private User initUser(UserRequest userRequest) {
         User userObj = new User();
         userObj.setUsername(userRequest.getUsername());
