@@ -50,4 +50,10 @@ public class EntityDtoConverter {
 				.map(parking -> convertEntityToDto2(parking))
 				.collect(Collectors.toList());
 	}
+
+	public List<CicloviaResponseDto> convertCicloviasToDto(List<Ciclovia> ciclovias) {
+        return ciclovias.stream()
+                .map(ciclovia -> convertEntityToDto(ciclovia))
+                .collect(Collectors.toList());
+    }
 }
