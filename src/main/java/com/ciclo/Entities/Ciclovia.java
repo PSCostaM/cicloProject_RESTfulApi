@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.ciclo.Dto.CicloviaRequestDto;
 
 import javax.persistence.FetchType;
@@ -25,14 +28,19 @@ import lombok.NoArgsConstructor;
 @Table(name = "Ciclovia")
 public class Ciclovia {
     @Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idCiclovia;
 
     @Column(name = "nombreCiclovia", length = 50)
     private String nombreCiclovia;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "ciclovia")
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciclovia")
     private List<Calificacion> calificaciones;
+
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "ciclovia")
+    private List<Report> reportes;
 
     public Ciclovia(CicloviaRequestDto cicloviaDto){
         this.nombreCiclovia = cicloviaDto.getNombreCiclovia();

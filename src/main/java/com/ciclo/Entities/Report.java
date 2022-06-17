@@ -36,4 +36,8 @@ public class Report {
 	private String description;
 	@Column(name="idUser")
 	private long idUser;
+
+	@ManyToOne
+    @JoinColumn(name = "idCiclovia", nullable = true)
+    private Ciclovia ciclovia;
 }

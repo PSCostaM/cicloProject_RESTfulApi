@@ -6,10 +6,14 @@ import com.ciclo.Dto.CalificacionRequestDto;
 import com.ciclo.Dto.CalificacionResponseDto;
 import com.ciclo.Dto.CicloviaRequestDto;
 import com.ciclo.Dto.CicloviaResponseDto;
+import com.ciclo.Dto.ReportRequest;
+import com.ciclo.Dto.ReportResponse;
 import com.ciclo.Entities.Calificacion;
 import com.ciclo.Entities.Ciclovia;
+import com.ciclo.Entities.Report;
 import com.ciclo.Services.CicloviaService;
 import com.ciclo.Util.EntityDtoConverter;
+import com.ciclo.Util.ReportDtoConverter;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,9 +29,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class CicloviaController {
     private CicloviaService cicloviaService;
     private EntityDtoConverter converter;
-    public CicloviaController(CicloviaService cicloviaService, EntityDtoConverter converter) {
+    private ReportDtoConverter reportConverter;
+    public CicloviaController(CicloviaService cicloviaService, EntityDtoConverter converter, ReportDtoConverter reportConverter) {
         this.cicloviaService = cicloviaService;
         this.converter = converter;
+        this.reportConverter = reportConverter;
     }
 
     @PostMapping
@@ -54,10 +60,22 @@ public class CicloviaController {
         return new ResponseEntity<>(converter.convertEntityToDto(calificacionCreated), HttpStatus.CREATED);
     }
 
+    @PostMapping("/{cicloviaId}/reports")
+    public ResponseEntity<ReportResponse> createReport(@PathVariable Long cicloviaId, @RequestBody ReportRequest report){
+        Report reportCreated = cicloviaService.createReport(cicloviaId, report);
+        return new ResponseEntity<>(reportConverter.convertReportToDto(reportCreated), HttpStatus.CREATED);
+    }
+
     @GetMapping("/{cicloviaId}/calificaciones")
     public ResponseEntity<List<CalificacionResponseDto>> getCalificacionesById(@PathVariable Long cicloviaId){
         List<Calificacion> calificacion = cicloviaService.getCalificacionesById(cicloviaId);
         return new ResponseEntity<>(converter.convertEntityToDto(calificacion), HttpStatus.OK);
+    }
+
+    @GetMapping("/{cicloviaId}/reports")
+    public ResponseEntity<List<ReportResponse>> getReportesById(@PathVariable Long cicloviaId){
+        List<Report> reports = cicloviaService.getReportsById(cicloviaId);
+        return new ResponseEntity<>(reportConverter.convertReportToDto(reports), HttpStatus.OK);
     }
 
     @GetMapping("/calificaciones/{calificacionId}")
