@@ -14,6 +14,7 @@ import com.ciclo.Repositories.CicloviaRepository;
 import com.ciclo.Repositories.ReportRepository;
 import com.ciclo.Util.CalificacionValidator;
 import com.ciclo.Util.CicloviaValidator;
+import com.ciclo.Util.ReportValidator;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,7 +49,7 @@ public class CicloviaService {
 
     @Transactional
     public Report createReport(Long idCiclovia, ReportRequest requestDto) {
-        // CalificacionValidator.validateCreate(calificacionDto);
+        ReportValidator.validateCreate(requestDto);
         Ciclovia ciclovia = getCicloviaById(idCiclovia);
         CicloviaValidator.validateGetByCiclovia(ciclovia);
         Report reportObj = new Report();
