@@ -1,15 +1,20 @@
 package com.ciclo.Services;
 
+import java.util.Date;
 import java.util.List;
 
 import com.ciclo.Dto.CalificacionRequestDto;
 import com.ciclo.Dto.CicloviaRequestDto;
+import com.ciclo.Dto.ReportRequest;
 import com.ciclo.Entities.Calificacion;
 import com.ciclo.Entities.Ciclovia;
+import com.ciclo.Entities.Report;
 import com.ciclo.Repositories.CalificacionRepository;
 import com.ciclo.Repositories.CicloviaRepository;
+import com.ciclo.Repositories.ReportRepository;
 import com.ciclo.Util.CalificacionValidator;
 import com.ciclo.Util.CicloviaValidator;
+import com.ciclo.Util.ReportValidator;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,10 +24,12 @@ import org.springframework.stereotype.Service;
 public class CicloviaService {
     private CicloviaRepository cicloviaRepository;
     private CalificacionRepository calificacionRepository;
+    private ReportRepository reportRepository;
 
-    public CicloviaService(CicloviaRepository cicloviaRepository, CalificacionRepository calificacionRepository) {
+    public CicloviaService(CicloviaRepository cicloviaRepository, CalificacionRepository calificacionRepository, ReportRepository reportRepository) {
         this.cicloviaRepository = cicloviaRepository;
         this.calificacionRepository = calificacionRepository;
+        this.reportRepository = reportRepository;
     }
 
     public Ciclovia createCiclovia(CicloviaRequestDto cicloviaDto) {
@@ -38,6 +45,19 @@ public class CicloviaService {
         CicloviaValidator.validateGetByCiclovia(ciclovia);
         Calificacion calificacion = new Calificacion(ciclovia , calificacionDto);
         return calificacionRepository.save(calificacion);
+    }
+
+    @Transactional
+    public Report createReport(Long idCiclovia, ReportRequest requestDto) {
+        ReportValidator.validateCreate(requestDto);
+        Ciclovia ciclovia = getCicloviaById(idCiclovia);
+        CicloviaValidator.validateGetByCiclovia(ciclovia);
+        Report reportObj = new Report();
+        reportObj.setDateReport(new Date());
+        reportObj.setDescription(requestDto.getDescription());
+        reportObj.setIdUser(requestDto.getIdUser());
+        reportObj.setCiclovia(ciclovia);
+        return reportRepository.save(reportObj);
     }
     
     @Transactional(readOnly = true)
@@ -55,6 +75,12 @@ public class CicloviaService {
     public List<Calificacion> getCalificacionesById(Long idCiclovia) {
         CicloviaValidator.validateGetByCiclovia(cicloviaRepository.findCicloviaByCicloviaId(idCiclovia));
         return calificacionRepository.getCalificacionesById(idCiclovia);
+    }
+
+    @Transactional
+    public List<Report> getReportsById(Long idCiclovia) {
+        CicloviaValidator.validateGetByCiclovia(cicloviaRepository.findCicloviaByCicloviaId(idCiclovia));
+        return reportRepository.getReportsById(idCiclovia);
     }
 
     public Calificacion getCalificacionById(Long idCalificacion) {

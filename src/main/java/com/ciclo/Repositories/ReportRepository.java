@@ -10,4 +10,7 @@ import java.util.List;
 public interface ReportRepository extends JpaRepository<Report, Long> {
     @Query(value = "SELECT r FROM Report r")
     List<Report> getAllReports();
+
+    @Query(value = "SELECT * FROM Report INNER JOIN Ciclovia ON Ciclovia.id_Ciclovia = Report.id_Ciclovia WHERE Ciclovia.id_Ciclovia = ?1", nativeQuery = true)
+	List<Report> getReportsById(Long idCiclovia);
 }
