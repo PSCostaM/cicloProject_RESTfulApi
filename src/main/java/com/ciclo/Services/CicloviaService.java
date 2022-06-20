@@ -49,7 +49,8 @@ public class CicloviaService {
 
     @Transactional
     public Report createReport(Long idCiclovia, ReportRequest requestDto) {
-        ReportValidator.validateCreate(requestDto);
+        boolean repeatedId = reportRepository.getReportByIdUser(requestDto.getIdUser()) != null;
+        ReportValidator.validateCreate(requestDto, repeatedId);
         Ciclovia ciclovia = getCicloviaById(idCiclovia);
         CicloviaValidator.validateGetByCiclovia(ciclovia);
         Report reportObj = new Report();
