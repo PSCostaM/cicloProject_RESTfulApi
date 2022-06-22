@@ -41,4 +41,10 @@ public class RutaxCicloviaController {
 		List<RutaxCiclovia> rutaxCiclovias = rutaxCicloviaService.getAllTiemposByCiclovia(idRuta);
 		return new ResponseEntity<>(converter.convertRutaxCicloviaToDto(rutaxCiclovias), HttpStatus.OK);
 	}
+	@GetMapping("/tiempoEstimado/{ubicacionSalida}/{ubicacionLlegada}")
+	public ResponseEntity<Float> getTiempoEstimado(@PathVariable String ubicacionSalida, @PathVariable String ubicacionLlegada){
+		Float rutaxCicloviaMessage = rutaxCicloviaService.getTiempoEstimado(ubicacionSalida, ubicacionLlegada);
+		return new ResponseEntity<>(rutaxCicloviaMessage,HttpStatus.OK);
+	}
+
 }
