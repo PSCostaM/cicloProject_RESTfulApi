@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ciclo.Dto.RutaxCicloviaRequest;
 import com.ciclo.Dto.RutaxCicloviaResponse;
+import com.ciclo.Entities.Ruta;
 import com.ciclo.Entities.RutaxCiclovia;
 import com.ciclo.Services.RutaxCicloviaService;
 import com.ciclo.Util.RutaxCicloviaDtoConverter;
@@ -40,5 +41,14 @@ public class RutaxCicloviaController {
 	public ResponseEntity<List<RutaxCicloviaResponse>> getTiemposByCiclovia(@PathVariable Long idRuta) {
 		List<RutaxCiclovia> rutaxCiclovias = rutaxCicloviaService.getAllTiemposByCiclovia(idRuta);
 		return new ResponseEntity<>(converter.convertRutaxCicloviaToDto(rutaxCiclovias), HttpStatus.OK);
+	}
+
+	@GetMapping("/caloriasPorRuta/{idRuta}")
+	public ResponseEntity<RutaxCicloviaResponse> getCaloriasByRuta(@PathVariable Long idRuta) {
+		double tiempo = rutaxCicloviaService.getTiempoByRuta(idRuta) * 6.4;
+		int calorias = (int)tiempo;
+		RutaxCiclovia rutaxCiclovia = new RutaxCiclovia();
+		rutaxCiclovia.setTiempoRealizado(calorias);
+		return new ResponseEntity<>(converter.convertRutaxCicloviaToDto(rutaxCiclovia), HttpStatus.OK);
 	}
 }

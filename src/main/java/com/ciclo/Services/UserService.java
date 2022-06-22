@@ -17,7 +17,9 @@ public class UserService {
     @Transactional
     public User createUser(UserRequest userRequest) {
         UserValidator.validateCreate(userRequest);
-        User userNew = initUser(userRequest);
+        User userNew = userRepository.getUserByEmail(userRequest.getEmail());
+        UserValidator.validateUserEmail(userNew);
+        userNew = initUser(userRequest);
         return userRepository.save(userNew);
     }
 
@@ -27,7 +29,11 @@ public class UserService {
     @Transactional(readOnly = true)
     public User getUserById(Long idUser) { return userRepository.getUserById(idUser); }
     @Transactional(readOnly = true)
-    public User getUserByLogIn(String email, String password) { return userRepository.getUserByLogIn(email, password); }
+    public User getUserByLogIn(String email, String password) {
+        User userNew = userRepository.getUserByLogIn(email, password);
+        UserValidator.validateLogIn(userNew);
+        return userNew;
+    }
 
     private User initUser(UserRequest userRequest) {
         User userObj = new User();
