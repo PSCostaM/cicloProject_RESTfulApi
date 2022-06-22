@@ -41,9 +41,8 @@ public class Calificacion {
     @JoinColumn(name = "idCiclovia", nullable = true)
     private Ciclovia ciclovia;
 
-    @ManyToOne
-    @JoinColumn(name = "idParking", nullable = true)
-    private Parking parking;
+    @Column(name = "idParking", nullable = true)
+    private Long parking;
 
     public Calificacion(Ciclovia ciclovia, CalificacionRequestDto calificacionDto) {
         this.fechaCalificacion = new Date();
@@ -56,6 +55,6 @@ public class Calificacion {
         this.fechaCalificacion = new Date();
         this.estrellasCalificacion = calificacionDto.getEstrellasCalificacion();
         this.descripcionCalificacion = calificacionDto.getDescripcionCalificacion();
-        this.parking = parking;
+        this.parking = parking.getId();
     }
 }

@@ -1,4 +1,5 @@
 package com.ciclo.Dto;
+import java.math.BigDecimal;
 import java.util.Date;
 
 import lombok.Data;
@@ -7,7 +8,7 @@ import lombok.Data;
 public class CalificacionResponseDto {
     Long idCalificacion;
     Date fechaCalificacion;
-    int estrellasCalificacion;
+    BigDecimal estrellasCalificacion;
     String descripcionCalificacion;
-    Long id;
+    Long idParking;
 }
