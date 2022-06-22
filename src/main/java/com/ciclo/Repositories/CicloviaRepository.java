@@ -8,4 +8,6 @@ public interface CicloviaRepository extends JpaRepository<Ciclovia, Long>{
 
     @Query("SELECT c FROM Ciclovia c WHERE c.idCiclovia = ?1")
     Ciclovia findCicloviaByCicloviaId(Long idCiclovia);
+    @Query("SELECT c FROM Ciclovia c WHERE c.nombreCiclovia = ?1")
+    Ciclovia findCicloviaByCicloviaName(String nombreCiclovia);
 }

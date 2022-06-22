@@ -1,4 +1,5 @@
 package com.ciclo.Services;
+import com.ciclo.Util.UserValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ public class UserService {
 
     @Transactional
     public User createUser(UserRequest userRequest) {
+        UserValidator.validateCreate(userRequest);
         User userNew = initUser(userRequest);
         return userRepository.save(userNew);
     }

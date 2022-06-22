@@ -1,6 +1,7 @@
 package com.ciclo.Services;
 
 import com.ciclo.Repositories.RutaRepository;
+import com.ciclo.Util.RutaValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ciclo.Dto.RutaRequest;
@@ -16,6 +17,7 @@ public class RutaService {
 
     @Transactional
     public Ruta createRuta(RutaRequest rutaRequest) {
+        RutaValidator.validateCreate(rutaRequest);
         Ruta rutaNew = initRuta(rutaRequest);
         return rutaRepository.save(rutaNew);
     }
