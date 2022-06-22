@@ -1,5 +1,6 @@
 package com.ciclo.Services;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.ciclo.Dto.CalificacionRequestDto;
@@ -8,6 +9,7 @@ import com.ciclo.Entities.Calificacion;
 import com.ciclo.Entities.Parking;
 import com.ciclo.Repositories.CalificacionRepository;
 import com.ciclo.Repositories.ParkingRepository;
+import com.ciclo.Util.ParkingValidator;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,8 +21,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class ParkingService {
 	@Autowired
-	private ParkingRepository parkingRepository;
+	private static ParkingRepository parkingRepository;
 	private CalificacionRepository calificacionRepository;
+	private ParkingValidator parkingValidator;
 
 	public ParkingService(ParkingRepository parkingRepository, CalificacionRepository calificacionRepository) {
         this.parkingRepository = parkingRepository;
@@ -30,6 +33,7 @@ public class ParkingService {
 	// Crear un estacionamiento
 	@Transactional(isolation = Isolation.READ_COMMITTED, propagation = Propagation.REQUIRED)
 	public Parking createParking(ParkingDtoRequest parkingDto) {
+		parkingValidator.validateCreate(parkingDto);
 		Parking parking = new Parking(parkingDto);
 		return parkingRepository.save(parking);
 	}
@@ -43,10 +47,19 @@ public class ParkingService {
 	}
 
 	// Reportar si un estacionamiento esta full
-	public String updateParkingStatus(Long parkingId, int isFull) {
-		String parkingName = parkingRepository.getById(parkingId).getUbicacion();
-		parkingRepository.updateStatus(parkingId, isFull);
-		return String.format("%s full: %d", parkingName, isFull);
+	@Transactional
+	public String updateParkingStatus(Long parkingId) {
+		parkingRepository.updateStatus(parkingId);
+		return String.format("");
+	}
+
+	@Transactional
+	public String updateParkingStars_(Long parkingId) {
+		float a=calificacionRepository.getAverageCalificacionByParkingId(parkingId); 
+		int b=1;
+		a=(float)(((int)(Math.pow(10,b)*a))/Math.pow(10,b)); 
+		parkingRepository.updateAvgStars(parkingId, a);
+		return String.format("");
 	}
 
 	//Listar todos los parkings
@@ -84,4 +97,8 @@ public class ParkingService {
     public Parking getParkingbyId(Long id) {
         return parkingRepository.findParkingbyID(id);
     }
+
+	public static List<String> getNames(){
+		return parkingRepository.getNames();
+	}
 }

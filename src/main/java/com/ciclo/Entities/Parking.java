@@ -31,18 +31,18 @@ public class Parking {
 	private String ubicacion;
 
 	@Column
-	private int isFull;
+	private boolean isFull;
 
 	@Column
-	private double stars;
+	private float stars;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "ciclovia")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "parking")
 	private List<Calificacion> calificaciones;
 
 	public Parking(ParkingDtoRequest parkingDto) {
 		this.ubicacion = parkingDto.getUbicacion();
-		this.isFull = parkingDto.getIsFull();
-		this.stars = parkingDto.getStars();
+		this.isFull = false;
+		this.stars = 0;
 		this.calificaciones = new ArrayList<>();
 	}
 }

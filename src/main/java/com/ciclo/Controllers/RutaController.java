@@ -44,14 +44,4 @@ public class RutaController {
         List<Ruta> rutas = rutaService.getRutasxPuntos(ubicacionSalida,ubicacionLlegada);
         return new ResponseEntity<>(converter.convertRutaToDto(rutas), HttpStatus.OK);
     }
-    @GetMapping("/tiempoMinimo/{ubicacionSalida}/{ubicacionLlegada}")
-    public ResponseEntity<Ruta> getTiempoMinimo(@PathVariable String ubicacionSalida, @PathVariable String ubicacionLlegada){
-        Ruta rutaxCicloviaMessage = rutaService.getTiempoMinimo(ubicacionSalida, ubicacionLlegada);
-        return new ResponseEntity<>(rutaxCicloviaMessage,HttpStatus.OK);
-    }
-    @GetMapping("/tiempoMinimo2/{ubicacionSalida}/{ubicacionLlegada}")
-    public ResponseEntity<Float> getTiempoEstimado(@PathVariable String ubicacionSalida, @PathVariable String ubicacionLlegada){
-        Float rutaxCicloviaMessage = rutaService.getTiempoMinimo2(ubicacionSalida, ubicacionLlegada);
-        return new ResponseEntity<>(rutaxCicloviaMessage,HttpStatus.OK);
-    }
 }

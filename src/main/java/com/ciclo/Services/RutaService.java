@@ -1,7 +1,6 @@
 package com.ciclo.Services;
 
 import com.ciclo.Repositories.RutaRepository;
-import com.ciclo.Util.RutaxCicloviaValidator;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ciclo.Dto.RutaRequest;
@@ -34,18 +33,5 @@ public class RutaService {
 
     public List<Ruta> getAllRutas() { return rutaRepository.getAllRutas(); }
 
-    public List<Ruta> getRutasxPuntos(String ubicacionSalida, String ubicacionLlegada) {
-        RutaxCicloviaValidator.validateCreate(ubicacionSalida,ubicacionLlegada);
-        return rutaRepository.getRutasxPuntos(ubicacionSalida,ubicacionLlegada); }
-
-    @Transactional
-    public Ruta getTiempoMinimo(String ubicacionSalida, String ubicacionLlegada){
-        RutaxCicloviaValidator.validateCreate(ubicacionSalida,ubicacionLlegada);
-        return rutaRepository.getTiempoMinimo(ubicacionSalida,ubicacionLlegada);
-    }
-    @Transactional
-    public Float getTiempoMinimo2(String ubicacionSalida, String ubicacionLlegada){
-        RutaxCicloviaValidator.validateCreate(ubicacionSalida,ubicacionLlegada);
-        return rutaRepository.getTiempoMinimo2(ubicacionSalida,ubicacionLlegada);
-    }
+    public List<Ruta> getRutasxPuntos(String ubicacionSalida, String ubicacionLlegada) { return rutaRepository.getRutasxPuntos(ubicacionSalida,ubicacionLlegada); }
 }

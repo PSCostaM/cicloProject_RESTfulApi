@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ciclo.Dto.RutaxCicloviaRequest;
 import com.ciclo.Entities.RutaxCiclovia;
-import com.ciclo.Util.RutaxCicloviaValidator;
 
 import java.util.List;
 
@@ -30,10 +29,5 @@ public class RutaxCicloviaService {
 
     public List<RutaxCiclovia> getAllTiemposByCiclovia(Long idRuta) {
         return rutaxCicloviaRepository.getTiemposByCiclovia(idRuta);
-    }
-
-    public Float getTiempoEstimado(String ubicacionSalida, String ubicacionLlegada){
-        RutaxCicloviaValidator.validateCreate(ubicacionSalida,ubicacionLlegada);
-        return rutaxCicloviaRepository.getTiempoEstimado(ubicacionSalida,ubicacionLlegada);
     }
 }

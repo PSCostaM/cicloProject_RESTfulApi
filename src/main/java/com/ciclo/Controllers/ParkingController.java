@@ -15,7 +15,6 @@ import com.ciclo.Util.EntityDtoConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/parking")
-@CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "*")
 public class ParkingController {
 	@Autowired
 	private ParkingService parkingService;
@@ -44,19 +43,19 @@ public class ParkingController {
 		return new ResponseEntity<>(parking, HttpStatus.OK);
 	}
 
-	@PutMapping("rating")
-	public ResponseEntity<String> updateStars(@RequestParam Long parkingId, @RequestParam Long parkingStars) {
-		String response = parkingService.updateParkingStars(parkingId, parkingStars);
+	@PutMapping("/rating/{idParking}")
+	public ResponseEntity<String> updateStars(@PathVariable Long idParking) {
+		String response = parkingService.updateParkingStars_(idParking);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
-	@PutMapping("full")
-	public ResponseEntity<String> updateStatus(@RequestParam Long parkingId, @RequestParam int isFull) {
-		String response = parkingService.updateParkingStatus(parkingId, isFull);
+	@PutMapping("/full/{parkingId}")
+	public ResponseEntity<String> updateStatus(@PathVariable Long parkingId) {
+		String response = parkingService.updateParkingStatus(parkingId);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
-	@GetMapping("list")
+	@GetMapping("/list")
 	public ResponseEntity<List<Parking>> listAllParkings() {
 		List<Parking> response = parkingService.listAllParkings();
 		return new ResponseEntity<>(response, HttpStatus.OK);
@@ -81,8 +80,7 @@ public class ParkingController {
 	}
 
 	@PostMapping("/{parkingId}/calificaciones")
-	public ResponseEntity<CalificacionResponseDto> createCalificacion(@PathVariable Long parkingId,
-			@RequestBody CalificacionRequestDto calificacion) {
+	public ResponseEntity<CalificacionResponseDto> createCalificacion(@PathVariable Long parkingId, @RequestBody CalificacionRequestDto calificacion) {
 		Calificacion calificacionCreated = parkingService.createCalificacion(parkingId, calificacion);
 		return new ResponseEntity<>(converter.convertEntityToDto(calificacionCreated), HttpStatus.CREATED);
 	}
