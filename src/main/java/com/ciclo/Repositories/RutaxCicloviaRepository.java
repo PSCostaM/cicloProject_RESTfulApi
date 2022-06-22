@@ -10,4 +10,6 @@ import java.util.List;
 public interface RutaxCicloviaRepository extends JpaRepository<RutaxCiclovia, Long> {
     @Query(value = "SELECT rc FROM RutaxCiclovia rc WHERE rc.idRuta = :idRuta")
     List<RutaxCiclovia> getTiemposByCiclovia(@Param("idRuta") Long idRuta);
+    @Query(value = "SELECT SUM(rc.tiempoRealizado) FROM RutaxCiclovia rc WHERE rc.idRuta = :idRuta")
+    int getTiempoByRuta(@Param("idRuta") Long idRuta);
 }

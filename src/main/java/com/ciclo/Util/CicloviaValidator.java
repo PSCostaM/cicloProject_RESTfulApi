@@ -11,6 +11,12 @@ public class CicloviaValidator {
         return true;
     }
 
+    public static boolean validateCicloviaName(Ciclovia ciclovia) {
+        if(ciclovia != null)
+            throw new IncorrectReportRequestException("Ya existe una ciclovia con ese nombre");
+        return true;
+    }
+
     public static boolean validateGetByCiclovia(Ciclovia ciclovia){
         if(ciclovia == null)
             throw new IncorrectReportRequestException("La ciclovia no fue encontrada");

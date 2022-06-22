@@ -30,4 +30,8 @@ public class RutaxCicloviaService {
     public List<RutaxCiclovia> getAllTiemposByCiclovia(Long idRuta) {
         return rutaxCicloviaRepository.getTiemposByCiclovia(idRuta);
     }
+
+    public int getTiempoByRuta(Long idRuta) {
+        return rutaxCicloviaRepository.getTiempoByRuta(idRuta);
+    }
 }

@@ -34,7 +34,9 @@ public class CicloviaService {
 
     public Ciclovia createCiclovia(CicloviaRequestDto cicloviaDto) {
         CicloviaValidator.validateCreate(cicloviaDto);
-        Ciclovia ciclovia = new Ciclovia(cicloviaDto);
+        Ciclovia ciclovia = getCicloviaByName(cicloviaDto.getNombreCiclovia());
+        CicloviaValidator.validateCicloviaName(ciclovia);
+        ciclovia = new Ciclovia(cicloviaDto);
         return cicloviaRepository.save(ciclovia);
     }
 
@@ -65,6 +67,11 @@ public class CicloviaService {
     public Ciclovia getCicloviaById(Long idCiclovia) {
         Ciclovia ciclovia =  cicloviaRepository.findCicloviaByCicloviaId(idCiclovia);
         CicloviaValidator.validateGetByCiclovia(ciclovia);
+        return ciclovia;
+    }
+
+    public Ciclovia getCicloviaByName(String nombreCiclovia) {
+        Ciclovia ciclovia = cicloviaRepository.findCicloviaByCicloviaName(nombreCiclovia);
         return ciclovia;
     }
 
