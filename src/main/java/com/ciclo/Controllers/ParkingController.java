@@ -25,6 +25,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/parking")
+<<<<<<< Updated upstream
+=======
+//@CrossOrigin(origins = "*")
+>>>>>>> Stashed changes
 public class ParkingController {
 	@Autowired
 	private ParkingService parkingService;
@@ -40,19 +44,19 @@ public class ParkingController {
 		return new ResponseEntity<>(parking, HttpStatus.OK);
 	}
 
-	@PutMapping("rating")
-	public ResponseEntity<String> updateStars(@RequestParam Long parkingId, @RequestParam Long parkingStars) {
-		String response = parkingService.updateParkingStars(parkingId, parkingStars);
+	@PutMapping("/rating/{idParking}")
+	public ResponseEntity<String> updateStars(@PathVariable Long idParking) {
+		String response = parkingService.updateParkingStars_(idParking);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
-	@PutMapping("full")
-	public ResponseEntity<String> updateStatus(@RequestParam Long parkingId, @RequestParam int isFull) {
-		String response = parkingService.updateParkingStatus(parkingId, isFull);
+	@PutMapping("/full/{parkingId}")
+	public ResponseEntity<String> updateStatus(@PathVariable Long parkingId) {
+		String response = parkingService.updateParkingStatus(parkingId);
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
-	@GetMapping("list")
+	@GetMapping("/list")
 	public ResponseEntity<List<Parking>> listAllParkings() {
 		List<Parking> response = parkingService.listAllParkings();
 		return new ResponseEntity<>(response, HttpStatus.OK);
@@ -71,10 +75,17 @@ public class ParkingController {
 	}
 
 	@PostMapping("/{parkingId}/calificaciones")
+<<<<<<< Updated upstream
     public ResponseEntity<CalificacionResponseDto> createCalificacion(@PathVariable Long parkingId, @RequestBody CalificacionRequestDto calificacion){
         Calificacion calificacionCreated = parkingService.createCalificacion(parkingId, calificacion);
         return new ResponseEntity<>(converter.convertEntityToDto(calificacionCreated), HttpStatus.CREATED);
     }
+=======
+	public ResponseEntity<CalificacionResponseDto> createCalificacion(@PathVariable Long parkingId, @RequestBody CalificacionRequestDto calificacion) {
+		Calificacion calificacionCreated = parkingService.createCalificacion(parkingId, calificacion);
+		return new ResponseEntity<>(converter.convertEntityToDto(calificacionCreated), HttpStatus.CREATED);
+	}
+>>>>>>> Stashed changes
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ParkingDto> findParkingbyId(@PathVariable Long Id){

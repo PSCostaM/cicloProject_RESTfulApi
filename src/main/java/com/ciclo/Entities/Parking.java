@@ -23,18 +23,23 @@ public class Parking {
 	private String ubicacion;
 
 	@Column
-	private int isFull;
+	private boolean isFull;
 
 	@Column
-	private double stars;
+	private float stars;
 
+<<<<<<< Updated upstream
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "ciclovia")
     private List<Calificacion> calificaciones;
+=======
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "parking")
+	private List<Calificacion> calificaciones;
+>>>>>>> Stashed changes
 
 	public Parking(ParkingDto parkingDto) {
 		this.ubicacion = parkingDto.getUbicacion();
-		this.isFull = parkingDto.getIsFull();
-		this.stars = parkingDto.getStars();
+		this.isFull = false;
+		this.stars = 0;
 		this.calificaciones = new ArrayList<>();
 	}
 }

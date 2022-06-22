@@ -17,15 +17,29 @@ public interface ParkingRepository extends JpaRepository<Parking, Long> {
 	void updateStars(Long parkingId, Long parkingStars);
 
 	@Modifying
-	@Query(value = "UPDATE parking SET is_full = ?2 WHERE id = ?1", nativeQuery = true)
-	void updateStatus(Long parkingId, int isFull);
+	@Query(value = "UPDATE parking SET is_full = NOT is_full WHERE id = ?1", nativeQuery = true)
+	void updateStatus(Long parkingId);
 
-	@Query(value = "SELECT * FROM Parking x WHERE x.is_full = 0", nativeQuery = true)
+	@Query(value = "SELECT * FROM Parking x WHERE x.full = 0", nativeQuery = true)
 	List<Parking> findDisponibilidad();
 <<<<<<< Updated upstream
 
 	@Query("SELECT c FROM Parking c WHERE c.id = ?1")
     Parking findParkingbyID(Long id);
+<<<<<<< Updated upstream
 =======
 >>>>>>> Stashed changes
 }
+=======
+
+	@Query(value = "SELECT * FROM Parking c ORDER BY c.stars desc", nativeQuery = true)
+	List<Parking> findAll();
+
+	@Modifying
+	@Query(value = "UPDATE Parking SET stars = ?2 WHERE id = ?1", nativeQuery = true)
+	void updateAvgStars(Long parkingId, float avg);
+
+	@Query(value = "SELECT x.ubicacion FROM Parking x")
+	List<String> getNames();
+}
+>>>>>>> Stashed changes

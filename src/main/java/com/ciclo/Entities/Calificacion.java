@@ -41,9 +41,14 @@ public class Calificacion {
     @JoinColumn(name = "idCiclovia")
     private Ciclovia ciclovia;
 
+<<<<<<< Updated upstream
     @ManyToOne
     @JoinColumn(name = "idParking")
     private Parking parking;
+=======
+    @Column(name = "idParking", nullable = true)
+    private Long parking;
+>>>>>>> Stashed changes
 
     public Calificacion(Ciclovia ciclovia, CalificacionRequestDto calificacionDto) {
         this.fechaCalificacion = new Date();
@@ -56,6 +61,6 @@ public class Calificacion {
         this.fechaCalificacion = new Date();
         this.estrellasCalificacion = calificacionDto.getEstrellasCalificacion();
         this.descripcionCalificacion = calificacionDto.getDescripcionCalificacion();
-        this.parking = parking;
+        this.parking = parking.getId();
     }
 }
