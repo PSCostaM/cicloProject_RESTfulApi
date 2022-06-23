@@ -51,4 +51,9 @@ public class RutaxCicloviaController {
 		rutaxCiclovia.setTiempoRealizado(calorias);
 		return new ResponseEntity<>(converter.convertRutaxCicloviaToDto(rutaxCiclovia), HttpStatus.OK);
 	}
+	@GetMapping("/tiempoEstimado/{ubicacionSalida}/{ubicacionLlegada}")
+	public ResponseEntity<Float> getTiempoEstimado(@PathVariable String ubicacionSalida, @PathVariable String ubicacionLlegada){
+		Float rutaxCicloviaMessage = rutaxCicloviaService.getTiempoEstimado(ubicacionSalida, ubicacionLlegada);
+		return new ResponseEntity<>(rutaxCicloviaMessage,HttpStatus.OK);
+	}
 }

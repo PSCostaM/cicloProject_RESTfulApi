@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.ciclo.Dto.RutaRequest;
 import com.ciclo.Entities.Ruta;
+import com.ciclo.Util.RutaxCicloviaValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,4 +37,14 @@ public class RutaService {
     public List<Ruta> getAllRutas() { return rutaRepository.getAllRutas(); }
 
     public List<Ruta> getRutasxPuntos(String ubicacionSalida, String ubicacionLlegada) { return rutaRepository.getRutasxPuntos(ubicacionSalida,ubicacionLlegada); }
+    @Transactional
+    public Ruta getTiempoMinimo(String ubicacionSalida, String ubicacionLlegada){
+        RutaxCicloviaValidator.validateCreate(ubicacionSalida,ubicacionLlegada);
+        return rutaRepository.getTiempoMinimo(ubicacionSalida,ubicacionLlegada);
+    }
+    @Transactional
+    public Float getTiempoMinimo2(String ubicacionSalida, String ubicacionLlegada){
+        RutaxCicloviaValidator.validateCreate(ubicacionSalida,ubicacionLlegada);
+        return rutaRepository.getTiempoMinimo2(ubicacionSalida,ubicacionLlegada);
+    }
 }

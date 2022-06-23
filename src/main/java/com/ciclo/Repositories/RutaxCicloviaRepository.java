@@ -12,4 +12,6 @@ public interface RutaxCicloviaRepository extends JpaRepository<RutaxCiclovia, Lo
     List<RutaxCiclovia> getTiemposByCiclovia(@Param("idRuta") Long idRuta);
     @Query(value = "SELECT SUM(rc.tiempoRealizado) FROM RutaxCiclovia rc WHERE rc.idRuta = :idRuta")
     int getTiempoByRuta(@Param("idRuta") Long idRuta);
+    @Query(value = "SELECT AVG(rc.tiempo_Realizado) FROM RutaX_Ciclovia rc WHERE rc.id_ruta IN (SELECT r.id_Ruta FROM Ruta r WHERE r.ubicacion_Salida = :ubicacionSalida AND r.ubicacion_Llegada = :ubicacionLlegada)",nativeQuery = true)
+    Float getTiempoEstimado(@Param("ubicacionSalida")String ubicacionSalida,@Param("ubicacionLlegada")String ubicacionLlegada);
 }
